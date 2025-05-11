@@ -18,7 +18,7 @@ export const PartThree = () => {
     <div className="px-3 py-2 flex flex-col gap-4">
       <div className="set-1">
         <h2 className="text-sm font-bold">Bot Throughput:</h2>
-        <h3>{test.remarks}</h3>
+        <h3>{}</h3>
       </div>
       <div className="set-2">
         <h2 className="text-sm font-bold">Infeed Throughput:</h2>
