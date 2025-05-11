@@ -116,25 +116,31 @@ export const Inputs = () => {
       onSubmit={submitToSheet}
       method="POST"
       action="https://script.google.com/macros/s/AKfycbyv_aMsFxYcDHprJlThjkitnIpY5Wk_aWHeGtWy8R7_sLuaUQNSE0cAPsmr4bK6OCz1OQ/exec"
-      className="w-full"
+      className="flex items-center justify-center flex-col w-fit-content w-full text-xs sm:text-md p-1"
     >
-      <div className="input-part w-full p-2 flex gap-3 items-start flex-col [&>div]:flex [&>div]:items-center [&>div]:justify-start [&>div]:h-10 [&>div]:w-full">
-        <div className="row">
-          <label htmlFor="date" className="text-right pr-5 w-[170px]">
+      <div className="input-part w-full md:p-2 flex gap-3 items-start flex-col [&>div]:flex [&>div]:items-center [&>div]:justify-start [&>div]:h-10 [&>div]:md:w-full">
+        <div className="row ">
+          <label
+            htmlFor="date"
+            className="text-right pr-5 sm:sm:w-[170px] w-[130px]"
+          >
             Date:
           </label>
           <input
             type="date"
             id="date"
-            className="max-w-[200px] w-auto p-1 shadow-md rounded-md px-3"
+            className="md:max-w-[150px] w-auto p-1 shadow-md rounded-md px-3"
             onChange={(e) => dispatch(setTestData({ date: e.target.value }))}
           />
         </div>
         <div className="row">
-          <label htmlFor="test-type" className="text-right pr-5 w-[170px]">
+          <label
+            htmlFor="test-type"
+            className="text-right pr-5 sm:w-[170px] w-[130px]"
+          >
             Test-Type:
           </label>
-          <div className="test-type-options gap-5 flex items-center ">
+          <div className="test-type-options gap-5 flex items-center md:w-full w-[100px] flex-col md:flex-row">
             <label className="ml-2 inline-flex items-center gap-2">
               <input
                 type="radio"
@@ -158,7 +164,7 @@ export const Inputs = () => {
         {test.testType === 1 && (
           <div className="row">
             <label
-              className="text-right pr-5 min-w-[170px]"
+              className="text-right pr-5 min-sm:w-[170px] w-[130px]"
               htmlFor="Release-ID"
             >
               Release-ID:
@@ -167,7 +173,7 @@ export const Inputs = () => {
               type="text"
               id="Release-ID"
               placeholder="Enter release ID"
-              className="px-4 py-1 items-center bg-[#ECEBE4] w-full rounded-md"
+              className="px-4 py-1 items-center bg-[#ECEBE4] md:w-full w-[150px] rounded-md"
               onChange={(e) =>
                 updateReleaseID({ value: e.target.value, dispatch })
               }
@@ -177,14 +183,17 @@ export const Inputs = () => {
         {test.testType === 2 && (
           <>
             <div className="row">
-              <label className="text-right pr-5 min-w-[170px]" htmlFor="codeID">
+              <label
+                className="text-right pr-5 min-sm:w-[170px] w-[130px]"
+                htmlFor="codeID"
+              >
                 Code-ID:
               </label>
               <input
                 type="text"
                 id="codeID"
                 placeholder="Enter code ID"
-                className="px-4 py-1 items-center bg-[#ECEBE4] w-full rounded-md"
+                className="px-4 py-1 items-center bg-[#ECEBE4] md:w-full w-[150px] rounded-md"
                 onChange={(e) =>
                   updateCodeId({ value: e.target.value, dispatch })
                 }
@@ -192,7 +201,7 @@ export const Inputs = () => {
             </div>
             <div className="row">
               <label
-                className="text-right pr-5 min-w-[170px]"
+                className="text-right pr-5 min-sm:w-[170px] w-[130px]"
                 htmlFor="targetedTest"
               >
                 Targeted-Test:
@@ -201,7 +210,7 @@ export const Inputs = () => {
                 type="text"
                 id="targetedTest"
                 placeholder="Enter targeted test"
-                className="px-4 py-1 items-center bg-[#ECEBE4] w-full rounded-md"
+                className="px-4 py-1 items-center bg-[#ECEBE4] md:w-full w-[150px] rounded-md"
                 onChange={(e) =>
                   updateTargetedTest({ value: e.target.value, dispatch })
                 }
@@ -210,39 +219,48 @@ export const Inputs = () => {
           </>
         )}
         <div className="row">
-          <label className="text-right pr-5 min-w-[170px]" htmlFor="Session-ID">
+          <label
+            className="text-right pr-5 min-sm:w-[170px] w-[130px]"
+            htmlFor="Session-ID"
+          >
             Session #:
           </label>
           <input
             type="text"
             id="Session-ID"
             placeholder="Enter session ID"
-            className="px-4 py-1 items-center bg-[#ECEBE4] w-full rounded-md"
+            className="px-4 py-1 items-center bg-[#ECEBE4] md:w-full w-[150px] rounded-md"
             onChange={(e) =>
               updateSessionId({ value: e.target.value, dispatch })
             }
           />
         </div>
         <div className="row">
-          <label className="text-right pr-5 min-w-[170px]" htmlFor="testerName">
+          <label
+            className="text-right pr-5 min-sm:w-[170px] w-[130px]"
+            htmlFor="testerName"
+          >
             Tester Name:
           </label>
           <input
             type="text"
             id="testerName"
             placeholder="Name of Tester"
-            className="px-4 py-1 items-center bg-[#ECEBE4] w-full rounded-md"
+            className="px-4 py-1 items-center bg-[#ECEBE4] md:w-full w-[150px] rounded-md"
             onChange={(e) =>
               updateTesterName({ value: e.target.value, dispatch })
             }
           />
         </div>
         <div className="row">
-          <label className="text-right pr-5 min-w-[170px]" htmlFor="Bots">
-            Bots
+          <label
+            className="text-right pr-5 min-sm:w-[170px] w-[130px]"
+            htmlFor="Bots"
+          >
+            Bots:
           </label>
-          <div className="flex w-full gap-2">
-            <label className="ml-2 inline-flex items-center gap-2">
+          <div className="flex  gap-2 md:w-full w-[150px] flex-wrap">
+            <label className="ml-2 inline-flex items-center gap-2 ">
               <input
                 type="checkbox"
                 className="bot-checkbox"
@@ -330,15 +348,22 @@ export const Inputs = () => {
           </div>
         </div>
         {test.botID.map((bot, index) => (
-          <div key={index} className="flex-row flex row" id={`row${bot.name}`}>
-            <div className="flex flex-row">
-              <label className="text-right pr-5 min-w-[170px]" htmlFor="start">
+          <div
+            key={index}
+            className="flex-row flex row items-center justify-center gap-2"
+            id={`row${bot.name}`}
+          >
+            <div className="flex flex-row items-center justify-center">
+              <label
+                className="md:text-right text-left pr-2 md:pr-5 sm:w-[170px] w-[120px]"
+                htmlFor="start"
+              >
                 {bot.name} Initial Battery (V)
               </label>
               <input
                 type="number"
                 id={`${bot.name}start`}
-                className="px-4 py-1 items-center bg-[#ECEBE4] w-full rounded-md"
+                className="px-4 py-1 items-center bg-[#ECEBE4] md:w-full w-[50px]  rounded-md"
                 onChange={(e) =>
                   updateBotStartTime({
                     bots: botID,
@@ -357,14 +382,17 @@ export const Inputs = () => {
                 }
               />
             </div>
-            <div className="flex flex-row">
-              <label className="text-right pr-5 min-w-[170px]" htmlFor="start">
+            <div className="flex flex-row items-center justify-center">
+              <label
+                className="md:text-right text-left pr-2 md:pr-5 sm:w-[170px] w-[120px]"
+                htmlFor="start"
+              >
                 {bot.name} Final Battery (V)
               </label>
               <input
                 type="number"
                 id={`${bot.name}stop`}
-                className="px-4 py-1 items-center bg-[#ECEBE4] w-full rounded-md"
+                className="px-4 py-1 items-center bg-[#ECEBE4] md:w-full w-[50px]  rounded-md"
                 onChange={(e) =>
                   updateBotStopTime({
                     bots: botID,
@@ -387,13 +415,16 @@ export const Inputs = () => {
         ))}
 
         <div className="row">
-          <label className="text-right pr-5 min-w-[170px]" htmlFor="start">
+          <label
+            className="text-right pr-5 min-sm:w-[170px] w-[130px]"
+            htmlFor="start"
+          >
             Sortation Start Time
           </label>
           <input
             type="time"
             id="start"
-            className="px-4 py-1 items-center bg-[#ECEBE4] w-full rounded-md check-time"
+            className="px-4 py-1 items-center bg-[#ECEBE4] md:w-full w-[150px] check-time rounded-md"
             onChange={(e) =>
               dispatch(setTestData({ startTime: e.target.value }))
             }
@@ -401,13 +432,16 @@ export const Inputs = () => {
         </div>
 
         <div className="row">
-          <label className="text-right pr-5 min-w-[170px]" htmlFor="end">
+          <label
+            className="text-right pr-5 min-sm:w-[170px] w-[130px]"
+            htmlFor="end"
+          >
             Sortation Stop Time
           </label>
           <input
             type="time"
             id="end"
-            className="px-4 py-1 items-center bg-[#ECEBE4] w-full rounded-md check-time"
+            className="px-4 py-1 items-center bg-[#ECEBE4] md:w-full w-[150px] rounded-md check-time"
             onChange={(e) =>
               dispatch(setTestData({ stopTime: e.target.value }))
             }
@@ -416,7 +450,7 @@ export const Inputs = () => {
 
         <div className="row">
           <label
-            className="text-right pr-5 min-w-[170px]"
+            className="text-right pr-5 min-sm:w-[170px] w-[130px]"
             htmlFor="infeed_interval"
           >
             Infeeding Interval(s)
@@ -425,7 +459,7 @@ export const Inputs = () => {
             type="number"
             id="infeed_interval"
             placeholder="Seconds between each infeed"
-            className="px-4 py-1 items-center bg-[#ECEBE4] w-full rounded-md"
+            className="px-4 py-1 items-center bg-[#ECEBE4] md:w-full w-[150px] rounded-md"
             onChange={(e) =>
               dispatch(setTestData({ interval: e.target.value }))
             }
@@ -433,7 +467,7 @@ export const Inputs = () => {
         </div>
         <div className="row">
           <label
-            className="text-right pr-5 min-w-[170px]"
+            className="text-right pr-5 min-sm:w-[170px] w-[130px]"
             htmlFor="packetsAvailable"
           >
             Packets Available:
@@ -442,7 +476,7 @@ export const Inputs = () => {
             type="text"
             id="packetsAvailable"
             placeholder="No. of Packets Available"
-            className="px-4 py-1 items-center bg-[#ECEBE4] w-full rounded-md"
+            className="px-4 py-1 items-center bg-[#ECEBE4] md:w-full w-[150px] rounded-md"
             onChange={(e) =>
               dispatch(setTestData({ availablePackets: e.target.value }))
             }
@@ -450,7 +484,7 @@ export const Inputs = () => {
         </div>
         <div className="row">
           <label
-            className="text-right pr-5 min-w-[170px]"
+            className="text-right pr-5 min-sm:w-[170px] w-[130px]"
             htmlFor="packetsSorted"
           >
             Packets Sorted:
@@ -459,7 +493,7 @@ export const Inputs = () => {
             type="text"
             id="packetsSorted"
             placeholder="No. of packest sorted"
-            className="px-4 py-1 items-center bg-[#ECEBE4] w-full rounded-md "
+            className="px-4 py-1 items-center bg-[#ECEBE4] md:w-full w-[150px] rounded-md"
             onChange={(e) =>
               dispatch(setTestData({ sortedPackets: e.target.value }))
             }
@@ -467,7 +501,7 @@ export const Inputs = () => {
         </div>
         <div className="row">
           <label
-            className="text-right pr-5 min-w-[170px]"
+            className="text-right pr-5 min-sm:w-[170px] w-[130px]"
             htmlFor="wrongSorted"
           >
             Wrong Sorted:
@@ -476,21 +510,24 @@ export const Inputs = () => {
             type="text"
             id="wrongSorted"
             placeholder="Wrong sorted Count"
-            className="px-4 py-1 items-center bg-[#ECEBE4] w-full rounded-md"
+            className="px-4 py-1 items-center bg-[#ECEBE4] md:w-full w-[150px] rounded-md"
             onChange={(e) =>
               dispatch(setTestData({ wrongSorted: e.target.value }))
             }
           />
         </div>
         <div className="row">
-          <label className="text-right pr-5 min-w-[170px]" htmlFor="outOfBin">
+          <label
+            className="text-right pr-5 min-sm:w-[170px] w-[130px]"
+            htmlFor="outOfBin"
+          >
             Out of Bin:
           </label>
           <input
             type="text"
             id="outOfBin"
             placeholder="no. out of bin"
-            className="px-4 py-1 items-center bg-[#ECEBE4] w-full rounded-md"
+            className="px-4 py-1 items-center bg-[#ECEBE4] md:w-full w-[150px] rounded-md"
             onChange={(e) =>
               dispatch(setTestData({ outOfBin: e.target.value }))
             }
@@ -498,7 +535,7 @@ export const Inputs = () => {
         </div>
         <div className="row">
           <label
-            className="text-right pr-5 min-w-[170px]"
+            className="text-right pr-5 min-sm:w-[170px] w-[130px]"
             htmlFor="packetsSorted"
           >
             Rejections:
@@ -507,30 +544,35 @@ export const Inputs = () => {
             type="text"
             id="Session-ID"
             placeholder="Rejected Count"
-            className="px-4 py-1 items-center bg-[#ECEBE4] w-full rounded-md"
+            className="px-4 py-1 items-center bg-[#ECEBE4] md:w-full w-[150px] rounded-md"
             onChange={(e) =>
               dispatch(setTestData({ rejections: e.target.value }))
             }
           />
         </div>
         <div className="row !h-20">
-          <label className="text-right pr-5 min-w-[170px]" htmlFor="remarks">
+          <label
+            className="text-right pr-5 min-sm:w-[170px] w-[130px]"
+            htmlFor="remarks"
+          >
             Remarks:
           </label>
           <textarea
             id="remarks"
             placeholder="No. of packest sorted"
-            className="px-4 py-1 items-center bg-[#ECEBE4] w-full rounded-md"
+            className="px-4 py-1 items-center bg-[#ECEBE4] md:w-full w-[150px] rounded-md"
             onChange={(e) => dispatch(setTestData({ remarks: e.target.value }))}
           />
         </div>
       </div>
-      <button
-        type="submit"
-        className="px-3 py-1 rounded-md shadow-md bg-lime-500 text-white cursor-pointer hover:bg-lime-600 transition-all duration-300 ease-in-out"
-      >
-        Submit to Google Sheet
-      </button>
+      <div className="button-container w-full justify-end flex items-center">
+        <button
+          type="submit"
+          className="px-3 py-1 rounded-md shadow-md bg-lime-500 text-white cursor-pointer hover:bg-lime-600 transition-all duration-300 ease-in-out"
+        >
+          Submit to Google Sheet
+        </button>
+      </div>
     </form>
   );
 };
