@@ -362,6 +362,7 @@ export const Inputs = () => {
               </label>
               <input
                 type="number"
+                step={0.01}
                 id={`${bot.name}start`}
                 className="px-4 py-1 items-center bg-[#ECEBE4] md:w-full w-[50px]  rounded-md"
                 onChange={(e) =>
@@ -391,6 +392,7 @@ export const Inputs = () => {
               </label>
               <input
                 type="number"
+                step={0.01}
                 id={`${bot.name}stop`}
                 className="px-4 py-1 items-center bg-[#ECEBE4] md:w-full w-[50px]  rounded-md"
                 onChange={(e) =>
