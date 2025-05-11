@@ -1,54 +1,58 @@
-# React + TypeScript + Vite
+# Throughput Calculator
+Hi, all,
+This project was developed as part of a request from one of my friend who works in automation of sorting bots.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Use
 
-Currently, two official plugins are available:
+The app contains a single form which takes the inputs, and calculates the throughput and other required metrics.
+It also sends the data to google sheets for better data management. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Apps Script
 
-## Expanding the ESLint configuration
+Google sheets currently provides us with Extension which helps to script and append data to sheets directly.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The script used and deployed in the Apps Scripts is given below.
+Feel free to refer the same for any use cases.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+<pre>
+  const sheetName = 'Sheet1'
+const scriptProp = PropertiesService.getScriptProperties()
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+function initialSetup () {
+  const activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+  scriptProp.setProperty('key', activeSpreadsheet.getId())
+}
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+function doPost (e) {
+  const lock = LockService.getScriptLock()
+  lock.tryLock(10000)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+  try {
+    const doc = SpreadsheetApp.openById(scriptProp.getProperty('key'))
+    const sheet = doc.getSheetByName(sheetName)
+
+    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
+    const nextRow = sheet.getLastRow() + 1
+
+    const newRow = headers.map(function(header) {
+      return header === 'Date' ? new Date() : e.parameter[header]
+    })
+
+    sheet.getRange(nextRow, 1, 1, newRow.length).setValues([newRow])
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'success', 'row': nextRow }))
+      .setMimeType(ContentService.MimeType.JSON)
+  }
+
+  catch (e) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'error', 'error': e }))
+      .setMimeType(ContentService.MimeType.JSON)
+  }
+
+  finally {
+    lock.releaseLock()
+  }
+}
+</pre>
